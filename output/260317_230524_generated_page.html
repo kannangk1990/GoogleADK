@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Language | Master the Machine Tongue</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fira+Code:wght@400;500&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for simple interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-purple': '#A855F7',
+                        'neon-green': '#22C55E',
+                        'neon-yellow': '#FDE047',
+                        'zinc-900': '#18181B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Archivo Black', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        'brutalist': '8px 8px 0px 0px #000000',
+                        'brutalist-lg': '12px 12px 0px 0px #000000',
+                        'brutalist-sm': '4px 4px 0px 0px #000000',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .neo-brutalist-border { border: 4px solid #000000; }
+        .neo-brutalist-border-b { border-bottom: 8px solid #000000; }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 20s linear infinite;
+        }
+
+        .marching-ants {
+            stroke-dasharray: 8;
+            animation: dash 1s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -16; }
+        }
+
+        .hover-pop {
+            transition: all 0.2s ease-in-out;
+        }
+        .hover-pop:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px 0px #000000;
+        }
+
+        /* Nav hover effect */
+        .nav-link-hover:hover {
+            box-shadow: 0px 4px 0px 0px #FDE047;
+        }
+    </style>
+</head>
+<body class="bg-white font-sans text-black antialiased" x-data="{ mobileMenu: false }">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white border-b-4 border-black px-4 md:px-8 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2 group cursor-pointer">
+            <div class="bg-neon-yellow p-1 neo-brutalist-border transition-colors duration-500" id="logo-box">
+                <span class="font-heading text-xl md:text-2xl">AI</span>
+            </div>
+            <span class="font-heading text-xl md:text-2xl tracking-tighter">LANGUAGE</span>
+        </div>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex gap-8 font-heading text-sm">
+            <a href="#glossary" class="nav-link-hover transition-all">GLOSSARY</a>
+            <a href="#playground" class="nav-link-hover transition-all">PLAYGROUND</a>
+            <a href="#toolkit" class="nav-link-hover transition-all">TOOLKIT</a>
+        </div>
+
+        <div class="hidden md:block">
+            <button class="bg-neon-green px-6 py-2 font-heading text-sm neo-brutalist-border shadow-brutalist hover-pop">
+                JOIN HIVE MIND
+            </button>
+        </div>
+
+        <!-- Mobile Toggle -->
+        <button class="md:hidden" @click="mobileMenu = !mobileMenu">
+            <i data-lucide="menu" class="w-8 h-8"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenu" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 translate-x-full"
+         x-transition:enter-end="opacity-100 translate-x-0"
+         class="fixed inset-0 z-[60] bg-white border-l-4 border-black p-8 md:hidden"
+         style="display: none;">
+        <button @click="mobileMenu = false" class="absolute top-4 right-4">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        <div class="flex flex-col gap-8 mt-12 font-heading text-3xl">
+            <a @click="mobileMenu = false" href="#glossary">GLOSSARY</a>
+            <a @click="mobileMenu = false" href="#playground">PLAYGROUND</a>
+            <a @click="mobileMenu = false" href="#toolkit">TOOLKIT</a>
+            <button class="bg-neon-green p-4 neo-brutalist-border shadow-brutalist mt-4">
+                JOIN HIVE MIND
+            </button>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="min-h-[80vh] flex items-center px-4 md:px-8 py-12 md:py-24 border-b-8 border-black overflow-hidden">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7">
+                    <h1 class="font-heading text-5xl md:text-8xl leading-none mb-8 -rotate-2 origin-left">
+                        MASTER THE <span class="bg-neon-purple text-white px-2">LANGUAGE</span> OF THE MACHINES.
+                    </h1>
+                    <p class="text-xl md:text-2xl font-medium mb-10 max-w-xl">
+                        From MCP to A2A—we break down the DNA of AI Agents so you can build the future. No fluff, just heavy-duty logic.
+                    </p>
+                    <a href="#glossary" class="inline-block bg-neon-purple text-white px-10 py-5 font-heading text-xl neo-brutalist-border shadow-brutalist hover-pop">
+                        START LEARNING ↓
+                    </a>
+                </div>
+                <div class="md:col-span-5 relative flex justify-center">
+                    <!-- Brain SVG Component -->
+                    <div class="animate-float relative w-full max-w-[400px]">
+                        <svg viewBox="0 0 200 200" class="w-full h-auto drop-shadow-[10px_10px_0px_rgba(0,0,0,1)]">
+                            <rect x="40" y="40" width="120" height="120" fill="#FDE047" stroke="black" stroke-width="4"/>
+                            <path d="M70 40 V160 M100 40 V160 M130 40 V160" stroke="black" stroke-width="2" />
+                            <circle cx="100" cy="100" r="40" fill="white" stroke="black" stroke-width="4"/>
+                            <path d="M100 70 C120 70 130 85 130 100 C130 115 120 130 100 130 C80 130 70 115 70 100 C70 85 80 70 100 70" fill="#A855F7" stroke="black" stroke-width="2" />
+                            <!-- Floating nodes -->
+                            <g class="animate-pulse">
+                                <rect x="20" y="20" width="30" height="30" fill="#22C55E" stroke="black" stroke-width="3"/>
+                                <circle cx="170" cy="50" r="15" fill="#A855F7" stroke="black" stroke-width="3"/>
+                                <polygon points="160,160 180,160 170,140" fill="#FDE047" stroke="black" stroke-width="3"/>
+                                <rect x="30" y="150" width="25" height="25" fill="black" stroke="white" stroke-width="2"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Glossary Section -->
+        <section id="glossary" class="py-24 px-4 md:px-8 bg-white border-b-8 border-black">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="font-heading text-4xl md:text-7xl mb-16 text-center underline decoration-8 decoration-neon-green">
+                    THE ACRONYM SOUP
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Card 1: MCP -->
+                    <div class="bg-white p-8 neo-brutalist-border shadow-brutalist hover:bg-neon-green transition-colors group">
+                        <span class="font-mono text-sm bg-black text-white px-2 py-1 mb-6 inline-block">[MCP]</span>
+                        <h3 class="font-heading text-2xl mb-4 leading-tight">Model Context Protocol</h3>
+                        <p class="font-medium group-hover:text-black">The standardized bridge between messy data sources and intelligent agents. One protocol to rule them all.</p>
+                    </div>
+                    <!-- Card 2: A2A -->
+                    <div class="bg-white p-8 neo-brutalist-border shadow-brutalist hover:bg-neon-purple transition-colors group">
+                        <span class="font-mono text-sm bg-black text-white px-2 py-1 mb-6 inline-block">[A2A]</span>
+                        <h3 class="font-heading text-2xl mb-4 leading-tight">Agent-to-Agent</h3>
+                        <p class="font-medium group-hover:text-white">Why talk to a human when you can talk to another bot? This is how autonomous networks coordinate complex tasks.</p>
+                    </div>
+                    <!-- Card 3: ADK -->
+                    <div class="bg-white p-8 neo-brutalist-border shadow-brutalist hover:bg-neon-yellow transition-colors group">
+                        <span class="font-mono text-sm bg-black text-white px-2 py-1 mb-6 inline-block">[ADK]</span>
+                        <h3 class="font-heading text-2xl mb-4 leading-tight">Agent Dev Kit</h3>
+                        <p class="font-medium">The essential toolbox. Frameworks and SDKs designed specifically for building agentic workflows from scratch.</p>
+                    </div>
+                    <!-- Card 4: Agents -->
+                    <div class="bg-white p-8 neo-brutalist-border shadow-brutalist hover:bg-zinc-900 transition-colors group">
+                        <span class="font-mono text-sm bg-white text-black px-2 py-1 mb-6 inline-block">[AGENTS]</span>
+                        <h3 class="font-heading text-2xl mb-4 leading-tight group-hover:text-white">Autonomous Entities</h3>
+                        <p class="font-medium group-hover:text-zinc-400">Not just chatbots. These entities have tools, memory, and the agency to *do* work without a human in the loop.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Playground -->
+        <section id="playground" class="py-24 px-4 md:px-8 bg-neon-yellow border-b-8 border-black" x-data="{ drive: false, github: true, slack: false }">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-heading text-4xl md:text-7xl mb-4">PROTOCOL PLAYGROUND</h2>
+                    <p class="text-xl font-bold font-mono uppercase tracking-widest">Test the MCP Connection</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12 items-center justify-between p-8 md:p-16 bg-white neo-brutalist-border shadow-brutalist-lg">
+                    <!-- Left: Toggles -->
+                    <div class="w-full lg:w-1/3 flex flex-col gap-6">
+                        <div class="flex items-center justify-between p-4 neo-brutalist-border bg-gray-50" :class="drive ? 'bg-neon-green/20' : ''">
+                            <span class="font-heading text-lg">GOOGLE DRIVE</span>
+                            <button @click="drive = !drive" class="w-16 h-8 bg-black relative neo-brutalist-border">
+                                <div class="absolute top-1 bottom-1 w-6 bg-white transition-all duration-200" :class="drive ? 'right-1 bg-neon-green' : 'left-1'"></div>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 neo-brutalist-border bg-gray-50" :class="github ? 'bg-neon-green/20' : ''">
+                            <span class="font-heading text-lg">GITHUB REPOS</span>
+                            <button @click="github = !github" class="w-16 h-8 bg-black relative neo-brutalist-border">
+                                <div class="absolute top-1 bottom-1 w-6 bg-white transition-all duration-200" :class="github ? 'right-1 bg-neon-green' : 'left-1'"></div>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between p-4 neo-brutalist-border bg-gray-50" :class="slack ? 'bg-neon-green/20' : ''">
+                            <span class="font-heading text-lg">SLACK DMS</span>
+                            <button @click="slack = !slack" class="w-16 h-8 bg-black relative neo-brutalist-border">
+                                <div class="absolute top-1 bottom-1 w-6 bg-white transition-all duration-200" :class="slack ? 'right-1 bg-neon-green' : 'left-1'"></div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Center: Visualizer -->
+                    <div class="flex-1 flex justify-center items-center relative min-h-[300px] w-full">
+                        <svg viewBox="0 0 400 200" class="w-full max-w-lg">
+                            <!-- Connection Lines -->
+                            <path x-show="drive" d="M50 40 L160 100" stroke="black" stroke-width="4" fill="none" class="marching-ants" stroke-dasharray="8"/>
+                            <path x-show="github" d="M50 100 L160 100" stroke="black" stroke-width="4" fill="none" class="marching-ants" stroke-dasharray="8"/>
+                            <path x-show="slack" d="M50 160 L160 100" stroke="black" stroke-width="4" fill="none" class="marching-ants" stroke-dasharray="8"/>
+                            
+                            <!-- Central Agent -->
+                            <rect x="160" y="60" width="120" height="80" fill="#A855F7" stroke="black" stroke-width="4"/>
+                            <text x="220" y="105" text-anchor="middle" font-family="Archivo Black" fill="white" font-size="16">AI AGENT</text>
+                            
+                            <!-- Knowledge Base -->
+                            <path d="M320 60 L380 60 L380 140 L320 140 Z" fill="#22C55E" stroke="black" stroke-width="4" />
+                            <text x="350" y="105" text-anchor="middle" font-family="Archivo Black" fill="black" font-size="12">BRAIN</text>
+                            <path d="M280 100 L320 100" stroke="black" stroke-width="4" stroke-dasharray="4"/>
+                        </svg>
+                    </div>
+
+                    <!-- Right: Status -->
+                    <div class="w-full lg:w-1/3 bg-black text-neon-green p-6 font-mono text-sm neo-brutalist-border min-h-[200px]">
+                        <div class="mb-4 text-white border-b border-white/20 pb-2">SYSTEM_LOG:</div>
+                        <template x-if="drive"><div>> Connection established: Drive_API</div></template>
+                        <template x-if="github"><div>> Syncing repos... Context updated.</div></template>
+                        <template x-if="slack"><div>> Listening to real-time Slack stream.</div></template>
+                        <template x-if="!drive && !github && !slack"><div>> STANDBY: Waiting for data sources...</div></template>
+                        <div class="mt-4 animate-pulse">_</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolkit Section -->
+        <section id="toolkit" class="py-24 px-4 md:px-8 bg-neon-green border-b-8 border-black">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="font-heading text-4xl md:text-7xl mb-16 text-center text-black">THE ADK TOOLKIT</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Tool 1 -->
+                    <div class="relative group h-48 bg-white neo-brutalist-border shadow-brutalist flex items-center justify-center overflow-hidden cursor-help">
+                        <span class="font-heading text-3xl group-hover:-translate-y-20 transition-all duration-300">LangChain</span>
+                        <div class="absolute bottom-[-100%] group-hover:bottom-0 left-0 right-0 bg-black text-white p-4 transition-all duration-300">
+                            <p class="font-mono text-xs">Fun Fact: The OG of orchestrating agentic chains. Over 80k stars on GitHub!</p>
+                        </div>
+                    </div>
+                    <!-- Tool 2 -->
+                    <div class="relative group h-48 bg-white neo-brutalist-border shadow-brutalist flex items-center justify-center overflow-hidden cursor-help">
+                        <span class="font-heading text-3xl group-hover:-translate-y-20 transition-all duration-300">CrewAI</span>
+                        <div class="absolute bottom-[-100%] group-hover:bottom-0 left-0 right-0 bg-black text-white p-4 transition-all duration-300">
+                            <p class="font-mono text-xs">Fun Fact: Focused on role-playing agents. Let your bots have a meeting!</p>
+                        </div>
+                    </div>
+                    <!-- Tool 3 -->
+                    <div class="relative group h-48 bg-white neo-brutalist-border shadow-brutalist flex items-center justify-center overflow-hidden cursor-help">
+                        <span class="font-heading text-3xl group-hover:-translate-y-20 transition-all duration-300">PydanticAI</span>
+                        <div class="absolute bottom-[-100%] group-hover:bottom-0 left-0 right-0 bg-black text-white p-4 transition-all duration-300">
+                            <p class="font-mono text-xs">Fun Fact: Built by the Pydantic team for rock-solid data validation in AI.</p>
+                        </div>
+                    </div>
+                    <!-- Tool 4 -->
+                    <div class="relative group h-48 bg-white neo-brutalist-border shadow-brutalist flex items-center justify-center overflow-hidden cursor-help">
+                        <span class="font-heading text-3xl group-hover:-translate-y-20 transition-all duration-300">AutoGPT</span>
+                        <div class="absolute bottom-[-100%] group-hover:bottom-0 left-0 right-0 bg-black text-white p-4 transition-all duration-300">
+                            <p class="font-mono text-xs">Fun Fact: One of the first projects to prove agents can work autonomously.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="py-24 px-4 md:px-8 bg-white">
+            <div class="max-w-3xl mx-auto bg-neon-purple p-8 md:p-16 neo-brutalist-border shadow-brutalist-lg text-center text-white">
+                <h2 class="font-heading text-4xl md:text-6xl mb-6">JOIN THE HIVE MIND</h2>
+                <p class="text-xl mb-10 font-medium">Get a weekly pulse on the agentic revolution. No spam, just protocol updates.</p>
+                <form class="flex flex-col md:flex-row gap-4">
+                    <input type="email" placeholder="ENTER YOUR HUMAN EMAIL..." class="flex-1 p-5 neo-brutalist-border text-black font-heading focus:outline-none focus:ring-4 focus:ring-neon-yellow" required>
+                    <button type="submit" class="bg-black text-white px-8 py-5 font-heading text-xl neo-brutalist-border shadow-brutalist hover:bg-white hover:text-black transition-all">
+                        SUBSCRIBE
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t-8 border-black">
+        <div class="bg-zinc-900 py-16 px-4 md:px-8 text-white">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="bg-neon-yellow p-1 neo-brutalist-border">
+                            <span class="font-heading text-black text-xl">AI</span>
+                        </div>
+                        <span class="font-heading text-xl tracking-tighter">LANGUAGE</span>
+                    </div>
+                    <p class="text-zinc-400 font-medium">Demystifying the Agentic Era, one acronym at a time.</p>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg mb-6 text-neon-green uppercase">Resources</h4>
+                    <ul class="space-y-4 font-mono text-sm">
+                        <li><a href="#" class="hover:text-neon-yellow">GitHub Repos</a></li>
+                        <li><a href="#" class="hover:text-neon-yellow">Whitepapers</a></li>
+                        <li><a href="#" class="hover:text-neon-yellow">Documentation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading text-lg mb-6 text-neon-green uppercase">Social</h4>
+                    <ul class="space-y-4 font-mono text-sm">
+                        <li><a href="#" class="hover:text-neon-yellow">Twitter / X</a></li>
+                        <li><a href="#" class="hover:text-neon-yellow">Discord Community</a></li>
+                        <li><a href="#" class="hover:text-neon-yellow">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Marquee -->
+        <div class="bg-neon-yellow border-t-4 border-black py-4 overflow-hidden">
+            <div class="animate-marquee whitespace-nowrap">
+                <span class="font-heading text-2xl mx-4">BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // </span>
+                <span class="font-heading text-2xl mx-4">BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // BUILT BY AI LANGUAGE // </span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Logo color switcher logic
+        const colors = ['#A855F7', '#22C55E', '#FDE047'];
+        const logoBox = document.getElementById('logo-box');
+        let colorIndex = 0;
+
+        setInterval(() => {
+            colorIndex = (colorIndex + 1) % colors.length;
+            logoBox.style.backgroundColor = colors[colorIndex];
+        }, 5000);
+    </script>
+</body>
+</html>
